@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
+import { connect } from 'react-redux';
 
 class Counter extends Component {
 	state = {
@@ -37,7 +38,7 @@ class Counter extends Component {
 	render() {
 		return (
 			<div>
-				<CounterOutput value={this.state.counter} />
+				<CounterOutput value={this.props.ctr} />
 
 				<CounterControl
 					label='Increment'
@@ -60,4 +61,10 @@ class Counter extends Component {
 	}
 }
 
-export default Counter;
+const mapStateToProps = (state) => {
+	return {
+		ctr: state.counter,
+	};
+};
+
+export default connect(mapStateToProps)(Counter);
